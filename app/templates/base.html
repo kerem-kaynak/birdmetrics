@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{{url_for('static', filename='base.css')}}" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="layout">
+            <div id="menubar">
+                <img onclick="{{url_for('simple_pages.index')}}" src="{{url_for('static', filename='white_logo.png')}}" id="logo">
+                <hr size="1" width="80%" color="#FFFFFF">
+                <button onclick="{{url_for('simple_pages.index')}}">Revenue</button>
+                <button onclick="{{url_for('simple_pages.index')}}">Customers</button>
+                <button onclick="{{url_for('simple_pages.index')}}">Retention</button>
+                <button onclick="{{url_for('simple_pages.index')}}">Profitability</button>
+                <button onclick="{{url_for('simple_pages.index')}}">Unit Economics</button>
+                <button onclick="{{url_for('simple_pages.index')}}">Retention Heatmap</button>
+            </div>
+            <div id="main">
+                <div id="content">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,8 +1,19 @@
-<html>
-    <head>
-        <link href="{{url_for('static', filename = 'style.css')}}" rel="stylesheet">
-    </head>
-    <body>
-        <h1>HELLO WORLD</h1>
-    </body>
-</html>
+{% extends 'base.html'%}
+
+{% block content %}
+
+<h1>{{page_name}}</h1>
+
+{% for metric in metrics %}
+
+<h2>
+    {{metric_dict[metric]}}
+</h2>
+
+<div id="metric-graph">
+    {{graph_metric(metric, user_id)}}
+</div>
+
+{% endfor %}
+
+{% endblock %}

@@ -17,13 +17,13 @@ def login():
 
         if user and check_password_hash(user.password, form.password.data):
             login_user(user)
-            return redirect(url_for('simple_pages.dashboard'))
+            return redirect(url_for('simple_pages.index'))
         else:
             flash('Invalid credentials, try again.')
-        return(redirect(url_for('authentication.login')))
+        return(redirect(url_for('asd.login')))
     elif request.method == 'POST':
         flash('Invalid credentials, try again.')
-        return(redirect(url_for('authentication.login')))
+        return(redirect(url_for('asd.login')))
     
     return render_template('authentication/login.html', form = form)
 
@@ -48,3 +48,4 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('authentication.login'))
+
