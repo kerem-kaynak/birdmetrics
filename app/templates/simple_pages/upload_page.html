@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<input type="file" id="fileUpload" accept=".csv">
+<button id="uploadButton">Upload File</button>
+
+<script src="{{url_for('static', filename='csvToJson.js')}}"></script>
+
+{% endblock %}

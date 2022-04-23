@@ -5,18 +5,20 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
         <div id="layout">
             <div id="menubar">
-                <img onclick="{{url_for('simple_pages.index')}}" src="{{url_for('static', filename='white_logo.png')}}" id="logo">
+                <img onclick="{{url_for('simple_pages.revenue')}}" src="{{url_for('static', filename='white_logo.png')}}" id="logo">
                 <hr size="1" width="80%" color="#FFFFFF">
-                <button onclick="{{url_for('simple_pages.index')}}">Revenue</button>
-                <button onclick="{{url_for('simple_pages.index')}}">Customers</button>
-                <button onclick="{{url_for('simple_pages.index')}}">Retention</button>
-                <button onclick="{{url_for('simple_pages.index')}}">Profitability</button>
-                <button onclick="{{url_for('simple_pages.index')}}">Unit Economics</button>
-                <button onclick="{{url_for('simple_pages.index')}}">Retention Heatmap</button>
+                <button onclick="{{url_for('simple_pages.revenue')}}">Revenue</button>
+                <button onclick="{{url_for('simple_pages.revenue')}}">Customers</button>
+                <button onclick="{{url_for('simple_pages.revenue')}}">Retention</button>
+                <button onclick="{{url_for('simple_pages.revenue')}}">Profitability</button>
+                <button onclick="{{url_for('simple_pages.revenue')}}">Unit Economics</button>
+                <button onclick="{{url_for('simple_pages.revenue')}}">Retention Heatmap</button>
             </div>
             <div id="main">
                 <div id="content">

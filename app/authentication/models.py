@@ -22,3 +22,11 @@ class Metric(db.Model):
     metric_name = db.Column(db.String(120))
     month = db.Column(db.Date)
     value = db.Column(db.Numeric)
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

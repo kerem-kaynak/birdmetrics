@@ -1,9 +1,13 @@
+from datetime import date
+from distutils.command.upload import upload
 from os import name
-from flask import Blueprint, redirect, render_template, url_for
-from flask_login import current_user
-
+from flask import Blueprint, redirect, render_template, url_for, request
+from flask_login import current_user, login_required
+import json
+import datetime
 from app.simple_pages.helpers.graph_metric import graph_metric
 from app.authentication.helpers.forms import LoginForm
+from app.simple_pages.helpers.metric_calculation import *
 
 blueprint = Blueprint('simple_pages', __name__)
 
@@ -28,9 +32,59 @@ metric_dict = {
     'monthly_gross_churn': 'Gross MRR Churn'
 }
 
-@blueprint.route('/')
-def index():
+@blueprint.route('/revenue')
+@login_required
+def revenue():
     user_id = current_user.id
-    page_name = 'Dashboard'
-    return render_template('simple_pages/homepage.html', page_name=page_name, metrics=['arr'], user_id=user_id, metric_dict=metric_dict)
+    page_name = 'Revenue Metrics'
+    metrics = ['arr','mrr','new_mrr','expansion_mrr','contraction_mrr','churned_mrr']
+    return render_template('simple_pages/metric_page.html', page_name=page_name, metrics=metrics, user_id=user_id, metric_dict=metric_dict)
+
+@blueprint.route('/customers')
+@login_required
+def customers():
+    user_id = current_user.id
+    page_name = 'Customer Metrics'
+    metrics = ['customers','new_customers','churned_customers']
+    return render_template('simple_pages/metric_page.html', page_name=page_name, metrics=metrics, user_id=user_id, metric_dict=metric_dict)
+
+@blueprint.route('/retention')
+@login_required
+def retention():
+    user_id = current_user.id
+    page_name = 'Retention Metrics'
+    metrics = ['logo_retention','logo_churn_rate','customer_lifetime']
+    return render_template('simple_pages/metric_page.html', page_name=page_name, metrics=metrics, user_id=user_id, metric_dict=metric_dict)
+
+@blueprint.route('/profitability')
+@login_required
+def profitability():
+    user_id = current_user.id
+    page_name = 'Profitability Metrics'
+    metrics = ['arpa','lifetime_value']
+    return render_template('simple_pages/metric_page.html', page_name=page_name, metrics=metrics, user_id=user_id, metric_dict=metric_dict)
+
+@blueprint.route('/unit_economics')
+@login_required
+def unit_economics():
+    user_id = current_user.id
+    page_name = 'Unit Economics'
+    metrics = ['ndr','monthly_gross_churn','net_mrr_churn', 'quick_ratio']
+    return render_template('simple_pages/metric_page.html', page_name=page_name, metrics=metrics, user_id=user_id, metric_dict=metric_dict)
     
+@blueprint.route('/upload', methods=['GET','POST'])
+@login_required
+def upload_file():
+    if request.method == "POST":
+        upload_data = request.form.get("data", False)
+        upload_data = json.loads(upload_data)
+        for i in upload_data.keys():
+            if i != 'time':
+                for j in range(len(upload_data[i])):
+                    upload_data[i][j] = float(upload_data[i][j])
+            else:
+                for j in range(len(upload_data[i])):
+                    upload_data[i][j] = datetime.datetime.strptime(upload_data[i][j], '%Y-%m-%d').date()
+        revenue_metrics(upload_data)
+        print('done')
+    return render_template('simple_pages/upload_page.html')

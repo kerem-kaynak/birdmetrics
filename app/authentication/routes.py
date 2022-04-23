@@ -17,7 +17,7 @@ def login():
 
         if user and check_password_hash(user.password, form.password.data):
             login_user(user)
-            return redirect(url_for('simple_pages.index'))
+            return redirect(url_for('simple_pages.revenue'))
         else:
             flash('Invalid credentials, try again.')
         return(redirect(url_for('asd.login')))

@@ -11,6 +11,6 @@ def graph_metric(metric, user_id):
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=dates, y=values, fill='tozeroy', line_color = '#6DB661'))
     fig.update_xaxes(dtick="M1", tickformat="%b\n%Y")
-    fig.update_layout(plot_bgcolor = 'rgba(0,0,0,0)')
+    fig.update_layout(plot_bgcolor = 'rgba(0,0,0,0)', margin=dict(pad=10))
     graph =  plotly.io.to_html(fig)
     return Markup(graph)

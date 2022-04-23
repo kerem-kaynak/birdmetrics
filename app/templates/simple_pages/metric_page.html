@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<h1>{{page_name}}</h1>
+
+<div id="overflow_div">
+    {% for metric in metrics %}
+
+    <h2>
+        {{metric_dict[metric]}}
+    </h2>
+
+    <div id="metric-graph">
+        {{graph_metric(metric, user_id)}}
+    </div>
+
+    {% endfor %}
+
+    <div id="spacer"></div>
+
+</div>
+
+
+
+{% endblock %}
