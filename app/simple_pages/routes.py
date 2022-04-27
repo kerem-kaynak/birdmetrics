@@ -1,8 +1,10 @@
+from crypt import methods
 from datetime import date
 from distutils.command.upload import upload
 from os import name
-from flask import Blueprint, redirect, render_template, url_for, request
+from flask import Blueprint, redirect, render_template, url_for, request, flash
 from flask_login import current_user, login_required
+from flask.helpers import get_flashed_messages
 import json
 import datetime
 from app.simple_pages.helpers.graph_metric import graph_metric
@@ -72,19 +74,35 @@ def unit_economics():
     metrics = ['ndr','monthly_gross_churn','net_mrr_churn', 'quick_ratio']
     return render_template('simple_pages/metric_page.html', page_name=page_name, metrics=metrics, user_id=user_id, metric_dict=metric_dict)
     
-@blueprint.route('/upload', methods=['GET','POST'])
+@blueprint.route('/upload')
 @login_required
 def upload_file():
-    if request.method == "POST":
-        upload_data = request.form.get("data", False)
-        upload_data = json.loads(upload_data)
-        for i in upload_data.keys():
-            if i != 'time':
-                for j in range(len(upload_data[i])):
-                    upload_data[i][j] = float(upload_data[i][j])
-            else:
-                for j in range(len(upload_data[i])):
-                    upload_data[i][j] = datetime.datetime.strptime(upload_data[i][j], '%Y-%m-%d').date()
-        revenue_metrics(upload_data)
-        print('done')
     return render_template('simple_pages/upload_page.html')
+
+@blueprint.route('/')
+def index():
+    return redirect(url_for('simple_pages.revenue'))
+
+@blueprint.route('/fileupload', methods=['POST'])
+@login_required
+def file_upload():
+    upload_data = request.form.get("data", False)
+    upload_data = json.loads(upload_data)
+    for i in upload_data.keys():
+        if i != 'time':
+            for j in range(len(upload_data[i])):
+                upload_data[i][j] = float(upload_data[i][j])
+        else:
+            for j in range(len(upload_data[i])):
+                upload_data[i][j] = datetime.datetime.strptime(upload_data[i][j], '%Y-%m-%d').date()
+    run_metrics(upload_data)
+    return redirect(url_for('simple_pages.revenue'))
+
+@blueprint.route('/retention_heatmap')
+@login_required
+def retention_heatmap():
+    user_id = current_user.id
+    page_name = 'Cohort Retention Heatmap'
+    tmp = Heatmap.query.filter_by(company_id = user_id).all()
+    graph = Markup(tmp[0].graph_markup)
+    return render_template('simple_pages/heatmap.html', graph = graph, page_name=page_name)

@@ -14,9 +14,15 @@ const uploadButton = document.getElementById('uploadButton').addEventListener('c
                 data_arr[results.data[i][0]] = temp
             }
             
-            $.post( "/upload", {
+            $.post( "/fileupload", {
                 data: JSON.stringify(data_arr) 
             });
+
+            alert('Upload successful!')
+
+            setTimeout(function(){
+                window.location.href = '/revenue';
+            }, 1000); 
         }
     })
 })

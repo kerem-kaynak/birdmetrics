@@ -11,17 +11,26 @@
     <body>
         <div id="layout">
             <div id="menubar">
-                <img onclick="{{url_for('simple_pages.revenue')}}" src="{{url_for('static', filename='white_logo.png')}}" id="logo">
+                <img onclick="window.location.href='/revenue'" src="{{url_for('static', filename='white_logo.png')}}" id="logo">
                 <hr size="1" width="80%" color="#FFFFFF">
-                <button onclick="{{url_for('simple_pages.revenue')}}">Revenue</button>
-                <button onclick="{{url_for('simple_pages.revenue')}}">Customers</button>
-                <button onclick="{{url_for('simple_pages.revenue')}}">Retention</button>
-                <button onclick="{{url_for('simple_pages.revenue')}}">Profitability</button>
-                <button onclick="{{url_for('simple_pages.revenue')}}">Unit Economics</button>
-                <button onclick="{{url_for('simple_pages.revenue')}}">Retention Heatmap</button>
+                <button onclick="window.location.href='/revenue'">Revenue</button>
+                <button onclick="window.location.href='/customers'">Customers</button>
+                <button onclick="window.location.href='/retention'">Retention</button>
+                <button onclick="window.location.href='/profitability'">Profitability</button>
+                <button onclick="window.location.href='/unit_economics'">Unit Economics</button>
+                <button onclick="window.location.href='/retention_heatmap'">Retention Heatmap</button>
+                <button onclick="window.location.href='/upload'" id="uploader">Upload</button>
             </div>
             <div id="main">
                 <div id="content">
+                    
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <h1 style="color: red;">{{ msg }}</h1>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     {% block content %}{% endblock %}
                 </div>
             </div>

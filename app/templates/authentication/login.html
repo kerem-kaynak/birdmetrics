@@ -1,6 +1,7 @@
 <html>
     <head>
         <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='login.css')}}" rel="stylesheet">
     </head>
     <body>
         <div id="login">
@@ -8,13 +9,14 @@
             <form method='post'>
                 {{ form.hidden_tag() }}
                 <p>
-                    {{ form.email.label }} <br>
-                    {{ form.email() }} <br>
-                    {{ form.password.label }} <br>
-                    {{ form.password() }} <br>
+                    {{ form.email.label }}
+                    {{ form.email(placeholder='Email address') }} <br>
+                    {{ form.password.label }}
+                    {{ form.password(placeholder="Password") }}
                     {{ form.submit() }}
                 </p>
             </form>
+            <a href="/register" id="register">Don't have an account? Sign up!</a>
         </div>
     </body>
 </html>

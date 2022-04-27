@@ -2,7 +2,52 @@
 
 {% block content %}
 
+<h1>Upload New Revenue Data</h1>
+<p>
+    Upload a <span style="font-weight: bold;">.csv</span> file of your sales data to get an instant overview of your metrics!
+    <br><br>
+    Here's an example of the format you need your data to be in 👇
+</p>
 
+<table>
+    <tr>
+        <th>time</th>
+        <th>2022-01-01</th>
+        <th>2022-02-01</th>
+        <th>2022-03-01</th>
+    </tr>
+    <tr>
+        <td>account_1_name</td>
+        <td>500</td>
+        <td>500</td>
+        <td>600</td>
+    </tr>
+    <tr>
+        <td>account_2_name</td>
+        <td>400</td>
+        <td>200</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>account_3_name</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1000</td>
+    </tr>
+</table>
+
+<a href="{{url_for('static', filename='template.csv')}}" download>Download Template</a>
+
+<h3>Important information about data format:</h3>
+
+<ul>
+    <li>Your data should contain monthly revenue from each account.</li>
+    <li>First header (first row, first element) should be "time" and the rest should be dates.</li>
+    <li>All dates need to be in <span style="font-weight: bold;">YYY-MM-DD</span> format.</li>
+    <li>Your data should be tabular, containing no extra columns, lines or spaces.</li>
+    <li>Months without revenue <span style="font-weight: bold;">shouldn't be blank</span>, they should be zero.</li>
+    <li>Your previous data will be wiped when you upload a new file.</li>
+</ul>
 
 <input type="file" id="fileUpload" accept=".csv">
 <button id="uploadButton">Upload File</button>

@@ -30,3 +30,16 @@ class Metric(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+class Heatmap(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    company_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    graph_markup = db.Column(db.Text)
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
