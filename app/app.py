@@ -7,7 +7,7 @@ from app.extensions.authentication import login_manager
 def create_app():
     app = Flask(__name__)
 
-    app.config.from_object('config')
+    app.config.from_object('app.config')
 
     register_extensions(app)
     register_blueprints(app)
