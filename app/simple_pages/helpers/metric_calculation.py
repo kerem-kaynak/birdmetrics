@@ -9,8 +9,10 @@ import plotly
 from sqlalchemy import true
 import plotly.express as px
 from markupsafe import Markup
+import psycopg2
+from psycopg2.extensions import register_adapter, AsIs
 
-
+psycopg2.extensions.register_adapter(np.int64, psycopg2._psycopg.AsIs)
 
 
 dummy = {'time':['2021-01-01','2021-02-01','2021-03-01','2021-04-01','2021-05-01','2021-06-01',],
