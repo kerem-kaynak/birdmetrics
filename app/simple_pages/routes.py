@@ -104,5 +104,7 @@ def retention_heatmap():
     user_id = current_user.id
     page_name = 'Cohort Retention Heatmap'
     tmp = Heatmap.query.filter_by(company_id = user_id).all()
+    if len(tmp) < 1:
+        return render_template('simple_pages/heatmap.html', graph = 'Upload data to view your heatmap.', page_name = page_name)
     graph = Markup(tmp[0].graph_markup)
     return render_template('simple_pages/heatmap.html', graph = graph, page_name=page_name)
