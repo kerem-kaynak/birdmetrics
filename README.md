@@ -13,7 +13,7 @@ Birdmetrics is a web application that lets you upload sales data of your company
 Go to http://127.0.0.1:5000 in your browser to view and use the app.
 
 ## Architecture diagram
-
+![image](https://user-images.githubusercontent.com/93583929/166246620-b996350e-146c-452b-8a33-3d4160c484bd.png)
 [Architecture Diagram](https://docs.google.com/drawings/d/e/2PACX-1vRewiKSRx-gMMW6vNoAsi-eUFvRMFTWHceR-GTnvpXS2mQ7tSpvehfgk3pTEy2K2smc32Goaw0B54gP/pub?w=1009&h=456)
 
 ## How to use the app
