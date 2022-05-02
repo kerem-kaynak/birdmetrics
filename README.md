@@ -5,6 +5,7 @@ Birdmetrics is a web application that lets you upload sales data of your company
 * Make sure Python 3 is installed on your system
 * Clone the repo to your local system
 * Add the .env file to the root repository (.../birdmetrics/.env)
+* Create a virtual environment and activate it
 * Run the following command to install the dependencies:
 `pip install -r requirements.txt`
 * Run the following command to set up a development server and run the application:
