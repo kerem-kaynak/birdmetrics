@@ -24,5 +24,7 @@ Go to http://127.0.0.1:5000 in your browser to view and use the app.
 * Click "Okay" to be redirected to the homepage
 * You can now explore different tabs to inspect different metrics and view the "Cohort Retention Heatmap"
 
+View the app live @ birdmetrics.herokuapp.com
+
 ### Disclaimer 1: The Plotly interactive graphs take some time to load, make sure to give it some time if you're viewing the app hosted on Heroku :)
 ### Disclaimer 2: You can use the template provided on the upload page to test the app.
